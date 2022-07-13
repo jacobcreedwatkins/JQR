@@ -38,7 +38,7 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 | Hours | Task |
 |-------|------|
 | 3 hours| Research, writeup creation|
-| 6 hours | configuring VM's, setting up demo, creating demo|
+| 6 hours| configuring VM's, setting up demo, creating demo|
 | 
 
 
