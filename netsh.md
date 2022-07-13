@@ -32,3 +32,13 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 - [Microsoft netsh Guide](https://docs.microsoft.com/en-us/windows-server/networking/technologies/netsh/netsh-contexts)
 - [Embrace The Red's Port Forwarding and Port-Proxying on Windows](https://embracethered.com/blog/posts/2020/windows-port-forward/)
 - [Windows OS Hub Port Forwarding Guide](http://woshub.com/port-forwarding-in-windows/) 
+
+
+## Hours Log
+| Hours | Task |
+|-------|------|
+| 3 hours| Research, writeup creation|
+| 6 hours | configuring VM's, setting up demo, creating demo|
+| 
+
+
