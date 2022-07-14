@@ -34,6 +34,11 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 - [Windows OS Hub Port Forwarding Guide](http://woshub.com/port-forwarding-in-windows/) 
 - [Set Up a local python3 programming environment in Windows 10](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10)
 
+# DEMO
+- create snapshots ready-to-go for both the Windows 10 Home (client) and Windows 10 Pro (server) virtual machines
+- demonstrate the port forwarding aspect of it
+- have commands ready to go for the VM
+
 
 ## Hours Log
 | Hours | Task |
