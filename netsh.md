@@ -32,7 +32,7 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 - [Microsoft netsh Guide](https://docs.microsoft.com/en-us/windows-server/networking/technologies/netsh/netsh-contexts)
 - [Embrace The Red's Port Forwarding and Port-Proxying on Windows](https://embracethered.com/blog/posts/2020/windows-port-forward/)
 - [Windows OS Hub Port Forwarding Guide](http://woshub.com/port-forwarding-in-windows/) 
-- [Set Up a local python3 programming environment in Windows 10]
+- [Set Up a local python3 programming environment in Windows 10](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10)
 
 
 ## Hours Log
