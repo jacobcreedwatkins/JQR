@@ -15,30 +15,32 @@
 - `netsh interface portproxy` is extremely similar to ssh tunneling or manipulating iptables chains. 
 - `netsh` has port forwarding capabilities with `interface portproxy`, which is our focus in the JQR, it is a very robust command line scripting utility that is primarily used for network comfiguration
 
+
 ### Tunneling vs. port forwarding?
 Port forwarding is also often referred to as tunneling, and the two terms are used interchangeably. The encrypted "tunnel" serves as a means transfer data and deliver it safely to the remote system. This method is regularly used to circumvent standard firewall security protocols. Either terms are examples of network traffic redirection.
 
-## example
-- Suppose you had a web server running locally on port 80, and it only binds on 127.0.0.1 (loopback). If you wanted to tunnel that traffic out on a remote interface:
-- `netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=48333 connectaddress=127.0.0.1 connectport=80`
-  	
-- the above command would: invoke the netsh command and add a portproxy interface, going from an ipv4 to another ipv4 address, with a listening IP address of 0.0.0.0,
-a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
+# Limitations of `netsh`
 
-##### base syntax
-`netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress connectport=destport`
+- `netsh` is a very powerful and useful tool; however, it comes with a few key limitations.
+- most notably is that it is a proprietary Windows utility, which can only communicate with, configure, and be used with other machines using Windows operating systems. 
+- potentially better alternatives to `netsh` specifically for portforwarding and redirection exist, which may be more scalable, functional, or practical for a given operation.
+- despite `netsh` being very functional within Windows environments, `ssh` or secure shell also can be used in these environments, which also has cross platform compatibility with linux/unix, macOS, etc.
 
-# References
-- [Microsoft netsh Guide](https://docs.microsoft.com/en-us/windows-server/networking/technologies/netsh/netsh-contexts)
-- [Embrace The Red's Port Forwarding and Port-Proxying on Windows](https://embracethered.com/blog/posts/2020/windows-port-forward/)
-- [Windows OS Hub Port Forwarding Guide](http://woshub.com/port-forwarding-in-windows/) 
-- [Set Up a local python3 programming environment in Windows 10](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10)
-- [pythonbasics.org Web Server setup](https://pythonbasics.org/webserver/)
+![image](https://user-images.githubusercontent.com/100236631/179068047-2bd65755-316e-4896-9b26-93c5b70f6cee.png)
 
+- Windows has indicated that `netsh` functionality for TCP/IP may be deprecated in future versions of Windows. 
+- Note that this message is earliest dated back to 2012 where many `netsh.exe` commands displayed the message above upon execution in Windows Server 2012 and Windows Server 2012 R2. Despite this, `netsh` has continued to be supported in every major Windows NT release since, so take this with a grain of salt.
+
+#### base syntax of `netsh interface portproxy` for portforwarding
+- `netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress connectport=destport`
+- `netsh interface portproxy show all` -> shows all portforwarding configurations, example output below
+
+![image](https://user-images.githubusercontent.com/100236631/179072661-80e23c16-fb84-4326-8e7f-3fde7c6e66bc.png)
+ 
 # DEMO
-- create snapshots ready-to-go for both the Windows 10 Home (client) and Windows 10 Pro (server) virtual machines
-- demonstrate the port forwarding aspect of it
-- have commands ready to go for the VM
+- created snapshots ready-to-go for both the Windows 10 Home (client) and Windows 10 Pro (server) virtual machines
+- demonstrate the port forwarding aspect of it, explain the syntax and what is actually happening
+
 
 ## Demo pt. 1: Setting Up the Windows 10 Pro Server
 
@@ -47,23 +49,27 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 - `.\my_env\Scripts\activate` -> this will begin the `my_env` python3 virtual environment
 - `.\webserver.py` -> will actually start up the webserver, hosted on 192.168.210.129:8000
 
+
 ## Demo pt. 2: Using netsh port forwarding to connect to the python web server
 - open an administrator powershell session
 - `netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=44444 connectaddress=192.168.210.129 connectport=8000` -> explain what the command is actually doing, what the syntax means in layman's terms
-- open firefox and type `http://127.0.0.1:44444` into search address bar, should bring you to the  webserver
-- should now connect to the server, thus demonstrating successful port forwarding
+- open firefox and type `http://127.0.0.1:44444` into search address bar, should bring you to the webserver
+- successful connection to the server indicates netsh portforwarding and demonstration of redirection
 
-## Hours Log
+# References
+- [Microsoft netsh Guide](https://docs.microsoft.com/en-us/windows-server/networking/technologies/netsh/netsh-contexts)
+- [Embrace The Red's Port Forwarding and Port-Proxying on Windows](https://embracethered.com/blog/posts/2020/windows-port-forward/)
+- [Windows OS Hub Port Forwarding Guide](http://woshub.com/port-forwarding-in-windows/) 
+- [Set Up a local python3 programming environment in Windows 10](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10)
+- [pythonbasics.org Web Server setup](https://pythonbasics.org/webserver/)
+- [netsh potentially being deprecated](https://www.dell.com/support/kbdoc/en-us/000114303/recommended-use-of-windows-powershell-instead-of-network-shell-in-windows-server-2012-r2#:~:text=Many%20of%20the%20netsh.exe,and%20Windows%20Server%202012%20R2.)
+- [discussion of interfaces having their own IP addresses rather than individual devices](https://networkengineering.stackexchange.com/questions/56156/why-are-ip-addresses-given-to-each-interface-and-not-device-what-would-the-impl#:~:text=And%20the%20way%20an%20interface,which%20that%20Router%20belongs%20within.)
+
+### Hours Log
 | Hours | Task |
 |-------|------|
 | 3 hours| Research, writeup creation|
 | 6 hours| configuring VM's, setting up demo, creating demo|
-
-
-## VMWare Stuff
-
-`netsh firewall set icmpsetting 8 enable`
-
-^ this command helped my two host windows VM's talk to each other, it seemed that the firewall was getting in the way of the network communicating
+| 3.5 hours| additional configuration, testing demo, creating VMware snapshots, additions and revisions to writeup
 
 
