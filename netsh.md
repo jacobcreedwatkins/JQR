@@ -3,7 +3,7 @@
 ##### 1.2.35 (U) : Explain the limitations on the use of netsh for redirection of network traffic 
 
 
-# netsh preliminary research - what actually is it?
+# `netsh` preliminary research - what actually is it?
 - `netsh` or network shell is a windows command line utility allowing for local and/or remote configuaration of network devices and interfaces
 - one example of something you can do with `netsh` is change the IP address on your machine or edit wireless settings like changing your SSID
 - first included in Windows 2000 and now a staple functionality part of every major Windows NT (new technology) release afterward
@@ -11,8 +11,11 @@
 
 
 ## In the context of forwarding:
-- netsh with portproxy can be used similar to ssh or iptables. Port forwarding, for example, is a possible method of redirection that can be used.
-- Tunneling vs. port forwarding?
+ The `netsh interface portproxy` command provides a command-line tool for use in administering servers that act as proxies between IPv4 and IPv6 networks and applications.
+- `netsh interface portproxy` is extremely similar to ssh tunneling or manipulating iptables chains. 
+- `netsh` has port forwarding capabilities with `interface portproxy`, which is our focus in the JQR, it is a very robust command line scripting utility that is primarily used for network comfiguration
+
+### Tunneling vs. port forwarding?
 Port forwarding is also often referred to as tunneling, and the two terms are used interchangeably. The encrypted "tunnel" serves as a means transfer data and deliver it safely to the remote system. This method is regularly used to circumvent standard firewall security protocols. Either terms are examples of network traffic redirection.
 
 ## example
