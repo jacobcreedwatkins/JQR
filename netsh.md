@@ -16,7 +16,9 @@
 
 
 ## In the context of forwarding:
-- netsh with portproxy can be used similar to ssh or iptables 
+- netsh with portproxy can be used similar to ssh or iptables. Port forwarding, for example, is a possible method of redirection that can be used.
+- Tunneling vs. port forwarding?
+Port forwarding is also often referred to as tunneling, and the two terms are used interchangeably. The encrypted "tunnel" serves as a means transfer data and deliver it safely to the remote system. This method is regularly used to circumvent standard firewall security protocols. Either terms are examples of network traffic redirection.
 
 ## example
 - Suppose you had a web server running locally on port 80, and it only binds on 127.0.0.1 (loopback). If you wanted to tunnel that traffic out on a remote interface:
