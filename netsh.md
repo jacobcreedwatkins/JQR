@@ -39,6 +39,12 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 |-------|------|
 | 3 hours| Research, writeup creation|
 | 6 hours| configuring VM's, setting up demo, creating demo|
-| 
+
+
+## VMWare Stuff
+
+`netsh firewall set icmpsetting 8 enable`
+
+^ this command helped my two host windows VM's talk to each other, it seemed that the firewall was getting in the way of the network communicating
 
 
