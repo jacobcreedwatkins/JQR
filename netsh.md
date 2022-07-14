@@ -2,11 +2,6 @@
 ##### 1.2.34 (U) : Given an operational environment, demonstrate the use of redirection by netsh to forward traffic to a target device
 ##### 1.2.35 (U) : Explain the limitations on the use of netsh for redirection of network traffic 
 
-#### Things I will need:
-- windows 2kXX server vm
-- windows 10 vm (host)
-- netsh itself (obviously)
-
 
 # netsh preliminary research - what actually is it?
 - `netsh` or network shell is a windows command line utility allowing for local and/or remote configuaration of network devices and interfaces
@@ -45,7 +40,7 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 
 - open an administrator powershell
 - `cd ~/Environments` -> tab complete will bring you to "Environments" directory
-- `.\my_env\Scripts\activate` -> this will begin the `my_env` python virtual environment
+- `.\my_env\Scripts\activate` -> this will begin the `my_env` python3 virtual environment
 - `.\webserver.py` -> will actually start up the webserver, hosted on 192.168.210.129:8000
 
 ## Demo pt. 2: Using netsh port forwarding to connect to the python web server
