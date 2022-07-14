@@ -41,6 +41,18 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 - demonstrate the port forwarding aspect of it
 - have commands ready to go for the VM
 
+## Demo pt. 1: Setting Up the Windows 10 Pro Server
+
+- open an administrator powershell
+- `cd ~/Environments` -> tab complete will bring you to "Environments" directory
+- `.\my_env\Scripts\activate` -> this will begin the `my_env` python virtual environment
+- `.\webserver.py` -> will actually start up the webserver, hosted on 192.168.210.129:8000
+
+## Demo pt. 2: Using netsh port forwarding to connect to the python web server
+- open an administrator powershell session
+- `netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=44444 connectaddress=192.168.210.129 connectport=8000` -> explain what the command is actually doing, what the syntax means in layman's terms
+- firefox 127.0.0.1:44444
+- should now connect to the server, thus demonstrating successful port forwarding
 
 ## Hours Log
 | Hours | Task |
