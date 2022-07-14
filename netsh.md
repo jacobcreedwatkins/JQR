@@ -68,8 +68,8 @@ Port forwarding is also often referred to as tunneling, and the two terms are us
 ### Hours Log
 | Hours | Task |
 |-------|------|
-| 3 hours| Research, writeup creation|
+| 3 hours| initial research, writeup creation|
 | 6 hours| configuring VM's, setting up demo, creating demo|
-| 3.5 hours| additional configuration, testing demo, creating VMware snapshots, additions and revisions to writeup
+| 3.5 hours| additional configuration of virtual environment, testing demo, creating VMware snapshots, additions and revisions to writeup
 
 
