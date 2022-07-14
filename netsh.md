@@ -51,7 +51,7 @@ a listening port of 48333, and a connect address of 127.0.0.1 on port 80.
 ## Demo pt. 2: Using netsh port forwarding to connect to the python web server
 - open an administrator powershell session
 - `netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=44444 connectaddress=192.168.210.129 connectport=8000` -> explain what the command is actually doing, what the syntax means in layman's terms
-- firefox 127.0.0.1:44444
+- open firefox and type `http://127.0.0.1:44444` into search address bar, should bring you to the  webserver
 - should now connect to the server, thus demonstrating successful port forwarding
 
 ## Hours Log
