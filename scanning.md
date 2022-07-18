@@ -3,11 +3,6 @@
 
 # Port Scanning with `nmap` (network mapper)
 
-
-
-
-# all about `nmap`
-
 - to demonstrate port scanning, I used `nmap`
 - `nmap` or network mapper is an open source tool for network exploration and security auditing
 - it is designed to rapidly scan large networks or individual hosts
@@ -15,12 +10,26 @@
 
 ### `nmap` output
 
-- typical `nmap` output will look something like the block below:
-```
-
-< INSERT LATER >
+- example output after running a scan will look something like the block below:
 
 ```
+jacob@jacob-virtual-machine:~$ nmap -T4 192.168.210.129
+Starting Nmap 7.80 ( https://nmap.org ) at 2022-07-18 10:43 EDT
+Nmap scan report for 192.168.210.129
+Host is up (0.0011s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+```
+
+|        PORT       |                      STATE                           |                           SERVICE                            |
+|-------------------|------------------------------------------------------|--------------------------------------------------------------|
+| port / udp or tcp | open, closed, filtered, unfiltered, open\|filtered, and closed\|filtered; more info below  | nmap's best approximation of the service running on the port |
+
+- note that since services can run on alternate ports than their correspondiong well-known port, the services category should be taken with a grain of salt.
+- 
 
 ### Syntax Builder
 `nmap [ <Scan Type> ...] [ <Options> ] { <target specification> }`
