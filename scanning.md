@@ -24,12 +24,17 @@ PORT    STATE SERVICE
 445/tcp open  microsoft-ds
 ```
 
+
+
+
 |        PORT       |                      STATE                           |                           SERVICE                            |
 |-------------------|------------------------------------------------------|--------------------------------------------------------------|
 | port / udp or tcp | open, closed, filtered, unfiltered, open\|filtered, and closed\|filtered; more info below  | nmap's best approximation of the service running on the port |
 
 - note that since services can run on alternate ports than their correspondiong well-known port, the services category should be taken with a grain of salt.
-- 
+- open\|filtered indicates that `nmap` is unable to determine whether a port is open or filtered. This occurs for scan types in which open ports give no response. 
+- This state is used when Nmap is unable to determine whether a port is closed or filtered. It is only used for the IP ID idle scan, using the `-sI` option
+
 
 ### Syntax Builder
 `nmap [ <Scan Type> ...] [ <Options> ] { <target specification> }`
