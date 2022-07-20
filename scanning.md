@@ -49,16 +49,21 @@ PORT    STATE SERVICE
  - as a memory aid, port scan type options are of the form -s<C>, where <C> is a prominent character in the scan name, usually the first character
 
 # Specific Port Scans
-| Syntax |            Scan          |
-|--------|--------------------------|
-| `-sS`	 |	TCP SYN scan			|
-| `-sT`	 |	TCP connect scan		|
-| `-sU`	 |	UDP scans				|
-| `-sY`	 |	SCTP INIT scan			|	
-| `-sN`	 |	TCP NULL scan			|
-| `-sF`  |  TCP FIN scan			|
-| `-sX`	 |  XMAS scan				|
-| 
+| Syntax |            Scan          |          Additional Information                                                                                                                                                                                                                                                           |
+|--------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-sS`	 |	TCP SYN scan			          | Also referred to as half open scan. Most popular and default scan due to speed, relative stealth, and clear/reliable differentiation between the open, closed, and filtered states. This scan requires root priviliges since it uses raw sockets.                                         |
+| `-sT`	 |	TCP connect scan		       | This is the default TCP scan type when SYN scan is not an option (i.e when super user privileges are unavailable). Takes longer and requires more packets to obtain the same information, and target machines are more likely to log the connection. Generally worse than a TCP SYN scan. |
+| `-sU`	 |	UDP scans				            | Sends a UDP packet to every targetted port. UDP scanning is generally slower and more difficult than TCP, but should not be ignored as exploitable UDP services are quite common                                                                                                          |
+| `-sY`	 |	SCTP INIT scan			        |	
+| `-sN`	 |	TCP NULL scan			         |
+| `-sF`  | TCP FIN scan			          |
+| `-sX`	 | XMAS scan			 	           |
+| `-sA`  | TCP ACK scan             |
+| `-sW`  | TCP Window scan          |
+| `-sM`  | TCP Maimon scan          |
+| `-sZ`  | SCTP COOKIE ECHO scan    |
+| `-sO`  | IP protocol scan         |
+| `-sI`  | Idle Scan                | 
  
  
  
