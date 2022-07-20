@@ -48,7 +48,18 @@ PORT    STATE SERVICE
  - note: entire networks OR individual hosts can be scanned within the target specification
  - as a memory aid, port scan type options are of the form -s<C>, where <C> is a prominent character in the scan name, usually the first character
 
- # Port Scanning States
+# Specific Port Scans
+| Syntax |            Scan          |
+|--------|--------------------------|
+| `-sS`	 |	TCP SYN scan			|
+| `-sT`	 |	TCP connect scan		|
+| `-sU`	 |	UDP scans				|
+| `-sY`	 |	SCTP INIT scan			|	
+| `-sN`	 |	TCP NULL scan			|
+| `-sF`  |  TCP FIN scan			|
+| `-sX`	 |  XMAS scan				|
+| 
+ 
  
  
 # Demo
