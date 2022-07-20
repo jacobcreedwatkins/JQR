@@ -70,15 +70,17 @@ PORT    STATE SERVICE
 # Demo
  
  ```
- > dig scanme.nmap.org
- 
- use the following scans: -sS, -sT, -sU. Show how the -sT scan requires super user priviliges in order to run since it uses raw sockets. 
- man raw | egrep EPERM -A1          :    this command shows the literal proof of needing root privileges to interact with raw sockets. raw sockets require root privileges because they can be used to break many basic assumptions or rules of networking, such as running a server on any port (using well known ports for different services). normal users will not need to use raw sockets for almost anything and as a security measure they therefore require root priviliges.
- 
+> dig scanme.nmap.org                :    find the A record of the scanme.nmap.org FQDN for scanning
+> nmap -sS 45.33.32.156              :    perform an Nmap SYN scan on the resolved IP address of scanme.nmap.org , this scan will NOT work and will return that you require sudo priviliges to run this scan because it uses RAW sockets.
+> man raw | egrep EPERM -A1          :    this command shows the literal proof of needing root privileges to interact with raw sockets. raw sockets require root privileges because they can be used to break many basic assumptions or rules of networking, such as running a server on any port (using well known ports for different services). normal users will not need to use raw sockets for almost anything and as a security measure they therefore require root priviliges.
+> sudo nmap -sS 45.33.32.156         :    this command will show the TCP SYN half open scan properly working now that sudo privileges were used.
+> nmap -sT 45.33.32.156              :    demonstrates a TCP full connect scan. note that it does not require sudo privileges!
+> nmap -sU 45.33.32.156              :    demonstrates a UDP scan. note the additional UDP port 123 is now found, which did NOT show in our previous scans. online research shows us that this is the port used by the Network Time Protocol.
+use the following scans: -sS, -sT, -sU. Show how the -sT scan requires super user priviliges in order to run since it uses raw sockets. 
  
  ```
 
-- For my demonstration of portscanning I set up a Ubuntu 22.04 machine scanning a Windows 10 Home machine for ports of interest. I demonstrated various scans you can perform using nmap, including a XMAS tree scan, a TCP half-open scan, and various speeds of scanning. Additonally, I scanned the entire network to show `nmap`'s functionality for scanning entire networks over individual boxes.
+- For my demonstration of port scanning I used Nmap on a Ubuntu 22.04 virtual machine to scan scanme.nmap.org for ports of interest. I demonstrated various scans you can perform using Nmap, including a TCP SYN scan, a TCP connect scan, and a UDP scan. 
 
 
 # References
