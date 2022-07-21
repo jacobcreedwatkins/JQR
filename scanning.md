@@ -59,8 +59,10 @@ PORT    STATE SERVICE
  
 ## TCP Flag Scans
 - altough 3 scans are built in with manipulated TCP flag bits, any sort of custom TCP scan can be built using the `--scanflags` option.
-- example syntax as follows: `--scanflags URGACKPSHRSTSYNFIN` : would set all TCP flag bits. this is pointless and just to show what can be done
-- 9 (PSH and FIN)
+- example syntax     : `--scanflags URGACKPSHRSTSYNFIN` : would set all TCP flag bits. this is pointless and just to show what can be done
+- additional example : `--scanflags 9`                  : this would set the PSH and FIN bits, shows you can also do it numerically
+
+
 | Syntax |       Scan               |                                                Additional Information                                                      |
 |--------|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open|filtered`  | 
