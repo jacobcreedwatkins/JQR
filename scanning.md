@@ -32,7 +32,7 @@ PORT    STATE SERVICE
 
 
 # Port States
-1. `open`            : indicates that an application is actively accepting TCP connections, UDP datagrams
+1. `open`            : indicates that an application is actively accepting TCP connections / UDP datagrams. most useful and important state for our purposes
 2. `closed`          : A closed port is accessible (it receives and responds to Nmap probe packets), but there is no application listening on it. the port is still reachable
 3. `filtered`        : Nmap cannot determine if the port is open because packet filtering prevents its probes from reaching the port. The filtering could be from a dedicated firewall device, router rules, or host-based firewall software; provides the least amount of information
 4. `unfiltered`      : indicates that a port is accessible, but Nmap is unable to determine whether it is open or closed. Only the ACK scan, which is used to map firewall rulesets, classifies ports into this state
@@ -46,37 +46,45 @@ PORT    STATE SERVICE
  - as a memory aid, port scan type options are of the form `-s<C>`, where `<C>` is a prominent character in the scan name, usually the first character of the scan
 
 # Specific Port Scans
+
+# Main Scans
+
 | Syntax |            Scan          |          Additional Information                                                                                                                                                                                                                                                           |
 |--------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-sS`	 |	TCP SYN scan			          | Also referred to as half open scan. Most popular and default scan due to speed, relative stealth, and clear/reliable differentiation between the open, closed, and filtered states. This scan requires root priviliges since it uses raw sockets.                                         |
 | `-sT`	 |	TCP connect scan		       | This is the default TCP scan type when SYN scan is not an option (i.e when super user privileges are unavailable). Takes longer and requires more packets to obtain the same information, and target machines are more likely to log the connection. Generally worse than a TCP SYN scan. |
 | `-sU`	 |	UDP scans				            | Sends a UDP packet to every targetted port. UDP scanning is generally slower than TCP connect scanning, but should not be ignored as exploitable UDP services are quite common.                                                                                                           |
-| `-sA`  | TCP ACK scan             | Used to map out firewall rulesets, determining whether they are stateful or not and which ports are filtered. When scanning unfiltered systems, open and closed ports will both return a RST packet. Nmap then labels them as unfiltered, meaning that they are reachable by the ACK packet, but whether they are open or closed is undetermined. Does NOT determine open ports, or even `open\|filtered` ports!
-| `-sW`  | TCP Window scan          | Works just like an ACK scan, but can also determine if a port is open. It does this by examining the TCP Window field of the RST packets returned. Instead of always listing a port as unfiltered when it receives a RST back, a Window scan lists the port as `open` or `closed`. Very specialized scan that will NOT work reliably on all target machines.
-| `-sY`	 |	SCTP INIT scan			        |	SCTP INIT scan is the SCTP (Stream Control Transmission Protocol) equivalent of a TCP SYN scan. Can be performed quickly, scanning thousands of ports per second on a fast network not hampered by restrictive firewalls. Relatively unobtrusive and stealthy, since it never completes SCTP associations (aka "half-open"). Allows clear, reliable differentiation between the open, closed, and filtered states.
-| `-sM`  | TCP Maimon scan          | Works exactly the same as NULL, FIN, and Xmas scans, except that the probe is FIN/ACK.
 | `-sI`  | Idle Scan                | no packets are sent to the target from your real IP address. often used with `-Pn` for additional obfuscation syntax is: `-sI <zombie host>[:<probeport>] <target>`
- 
-## TCP Flag Scans
-- altough the 3 scans listed in the table below are built in, any sort of custom TCP scan can be built using the `--scanflags` option.
-- example syntax     : `--scanflags URGACKPSHRSTSYNFIN` : would set all TCP flag bits. this is pointless and just to show what can be done
-- additional example : `--scanflags 9`                  : this would set the PSH and FIN bits, shows you can also do it numerically
 
+### Customized TCP Flag Scans
+- Page 65 of RFC 793 (TCP) says that “if the destination port state is CLOSED .... an incoming segment not containing a RST causes a RST to be sent in response." Any packet not containing SYN, RST, or ACK bits will result in a returned RST if the port is closed and no response at all if the port is open, which Nmap can use to its advantage for the purpose of scanning for open ports.
+- altough the 3 scans listed in the table below are built in, any sort of custom TCP scan can be built using the `--scanflags` option.
+- example syntax     : `--scanflags PSHFIN` : would set the PSH and FIN bits
+- additional example : `--scanflags 9`      : this would also set the PSH and FIN bits, but numerically instead
 
 | Syntax |       Scan               |                                                Additional Information                                                      |
 |--------|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open\|filtered`  |
+| `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open\|filtered` |
 | `-sF`  | TCP FIN scan			          | Sets only the TCP FIN bit                                                                                                  |
 | `-sX`	 | XMAS scan			 	           | Sets the FIN, PSH, and URG flags, lighting the packet up like a christmas tree in wireshark.                               |
- 
+
+
+### Highly Specialized Misc. Scans
+
+| Syntax |       Scan               |                                                Additional Information                                                            |
+|--------|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `-sA`  | TCP ACK scan             | Used to map out firewall rulesets, determining whether they are stateful or not and which ports are filtered. When scanning unfiltered systems, open and closed ports will both return a RST packet. Nmap then labels them as unfiltered, meaning that they are reachable by the ACK packet, but whether they are open or closed is undetermined. Does NOT determine open ports, or even `open\|filtered` ports!
+| `-sW`  | TCP Window scan          | Works just like an ACK scan, but can also determine if a port is open. It does this by examining the TCP Window field of the RST packets returned. Instead of always listing a port as unfiltered when it receives a RST back, a Window scan lists the port as `open` or `closed`. Very specialized scan that will NOT work reliably on all target machines.
+| `-sY`	 |	SCTP INIT scan			        |	SCTP INIT scan is the SCTP (Stream Control Transmission Protocol) equivalent of a TCP SYN scan. Can be performed quickly, scanning thousands of ports per second on a fast network not hampered by restrictive firewalls. Relatively unobtrusive and stealthy, since it never completes SCTP associations (aka "half-open"). Allows clear, reliable differentiation between the open, closed, and filtered states.
+
+- note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. Typically only used by backend telecom systems, so a `-sY` scan is highly specialized.
+
  ### Additional Options
 
  - `-Pn` : pingless scan. This will skip the Nmap host discovery stage altogether. Normally, Nmap uses this stage to determine active machines for heavier scanning, but ths may be pointless if hosts are already known.
  
 - `-T<1,2,3,4,5>` : Timing options, where the number between 1 and 5 determines aggressiveness of the scan.
- 
-- Note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. Typically only used by backend telecom systems, so a `-sY` scan is highly specialized.
- 
+  
  
 | number |     speed   |   purpose/description                               |
 |--------|-------------|-----------------------------------------------------|
