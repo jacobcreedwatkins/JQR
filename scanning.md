@@ -60,9 +60,8 @@ PORT    STATE SERVICE
 | `-sX`	 | XMAS scan			 	           | Sets the FIN, PSH, and URG flags, lighting the packet up like a christmas tree in wireshark.
 | `-sA`  | TCP ACK scan             | Used to map out firewall rulesets, determining whether they are stateful or not and which ports are filtered. When scanning unfiltered systems, open and closed ports will both return a RST packet. Nmap then labels them as unfiltered, meaning that they are reachable by the ACK packet, but whether they are open or closed is undetermined. Does NOT determine open ports, or even open\|filtered ports!
 | `-sW`  | TCP Window scan          | Works just like an ACK scan, but can also determine if a port is open. It does this by examining the TCP Window field of the RST packets returned. Instead of always listing a port as unfiltered when it receives a RST back, a Window scan lists the port as `open` or `closed`. Very specialized scan that will NOT work reliably on all target machines.
-| `-sM`  | TCP Maimon scan          | Works exactly the same as NULL, FIN, and Xmas scans, except that the probe is FIN/ACK instead of 
-| `-sO`  | IP protocol scan         | 
-| `-sI`  | Idle Scan                | 
+| `-sM`  | TCP Maimon scan          | Works exactly the same as NULL, FIN, and Xmas scans, except that the probe is FIN/ACK.
+| `-sI`  | Idle Scan                | no packets are sent to the target from your real IP address. often used with `-Pn` for additional obfuscation syntax is: `-sI <zombie host>[:<probeport>] (idle scan)`
  
  
  ### Additional Options
@@ -71,14 +70,16 @@ PORT    STATE SERVICE
  Note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. 
  
 - `-T<1,2,3,4,5>` : Timing options, where the number between 1 and 5 determines aggressiveness of the scan.
-| number |     speed   |
-|--------|-------------|
-|    0   | paranoid    |
-|    1   | sneaky      |
-|    2   | polite      | 
-|    3   | normal      |
-|    4   | aggressive  | 
-|    5   | insane      |
+ 
+ 
+| number |     speed   |   purpose/description                               |
+|--------|-------------|-----------------------------------------------------|
+|    0   | paranoid    | IDS evasion                                         |
+|    1   | sneaky      | IDS evasion                                         |
+|    2   | polite      | use less bandwidth and target machine resources     |
+|    3   | normal      | default scan speed                                  |
+|    4   | aggressive  | speeds up scan                                      |
+|    5   | insane      | sacrifices accuracy for speed                       |
  
 # Demo
  
