@@ -61,11 +61,24 @@ PORT    STATE SERVICE
 | `-sA`  | TCP ACK scan             | Used to map out firewall rulesets, determining whether they are stateful or not and which ports are filtered. When scanning unfiltered systems, open and closed ports will both return a RST packet. Nmap then labels them as unfiltered, meaning that they are reachable by the ACK packet, but whether they are open or closed is undetermined. Does NOT determine open ports, or even open\|filtered ports!
 | `-sW`  | TCP Window scan          | Works just like an ACK scan, but can also determine if a port is open. It does this by examining the TCP Window field of the RST packets returned. Instead of always listing a port as unfiltered when it receives a RST back, a Window scan lists the port as `open` or `closed`. Very specialized scan that will NOT work reliably on all target machines.
 | `-sM`  | TCP Maimon scan          | Works exactly the same as NULL, FIN, and Xmas scans, except that the probe is FIN/ACK instead of 
-| `-sZ`  | SCTP COOKIE ECHO scan    |
-| `-sO`  | IP protocol scan         |
+| `-sO`  | IP protocol scan         | 
 | `-sI`  | Idle Scan                | 
  
+ 
+ ### Additional Options
+
+ - `-Pn` : pingless scan. This will skip the Nmap host discovery stage altogether. Normally, Nmap uses this stage to determine active machines for heavier scanning, but ths may be pointless if hosts are already known.
  Note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. 
+ 
+- `-T<1,2,3,4,5>` : Timing options, where the number between 1 and 5 determines aggressiveness of the scan.
+| number |     speed   |
+|--------|-------------|
+|    0   | paranoid    |
+|    1   | sneaky      |
+|    2   | polite      | 
+|    3   | normal      |
+|    4   | aggressive  | 
+|    5   | insane      |
  
 # Demo
  
