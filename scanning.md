@@ -62,6 +62,7 @@ PORT    STATE SERVICE
 - example syntax as follows: `--scanflags URGACKPSHRSTSYNFIN` : would set all TCP flag bits. this is pointless and just to show what can be done
 - 9 (PSH and FIN)
 | Syntax |       Scan               |                                                Additional Information                                                      |
+|--------|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open|filtered`  | 
 | `-sF`  | TCP FIN scan			          | Sets only the TCP FIN bit                                                                                                  |
 | `-sX`	 | XMAS scan			 	           | Sets the FIN, PSH, and URG flags, lighting the packet up like a christmas tree in wireshark.                               |
