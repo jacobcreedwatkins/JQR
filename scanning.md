@@ -43,7 +43,7 @@ PORT    STATE SERVICE
 ### Syntax Builder
 `nmap [ <Scan Type> ...] [ <Options> ] { <target specification> }`
  - note: entire networks OR individual hosts can be scanned within the target specification
- - as a memory aid, port scan type options are of the form -s<C>, where <C> is a prominent character in the scan name, usually the first character
+ - as a memory aid, port scan type options are of the form `-s<C>`, where `<C>` is a prominent character in the scan name, usually the first character of the scan
 
 # Specific Port Scans
 | Syntax |            Scan          |          Additional Information                                                                                                                                                                                                                                                           |
@@ -61,9 +61,10 @@ PORT    STATE SERVICE
 - altough 3 scans are built in with manipulated TCP flag bits, any sort of custom TCP scan can be built using the `--scanflags` option.
 - example syntax as follows: `--scanflags URGACKPSHRSTSYNFIN` : would set all TCP flag bits. this is pointless and just to show what can be done
 - 9 (PSH and FIN)
-| `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open|filtered` 
-| `-sF`  | TCP FIN scan			          | Sets only the TCP FIN bit 
-| `-sX`	 | XMAS scan			 	           | Sets the FIN, PSH, and URG flags, lighting the packet up like a christmas tree in wireshark.
+| Syntax |       Scan               |                                                Additional Information                                                      |
+| `-sN`	 |	TCP NULL scan			         | Does not set any TCP flag bits. Cannot distinguish open ports from certain filtered ones, giving response `open|filtered`  | 
+| `-sF`  | TCP FIN scan			          | Sets only the TCP FIN bit                                                                                                  |
+| `-sX`	 | XMAS scan			 	           | Sets the FIN, PSH, and URG flags, lighting the packet up like a christmas tree in wireshark.                               |
  
  ### Additional Options
 
