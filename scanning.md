@@ -105,7 +105,7 @@ PORT    STATE SERVICE
 > nmap -sT 45.33.32.156              :    demonstrates a TCP full connect scan. note that it does not require sudo privileges!
 > nmap -sU 45.33.32.156              :    demonstrates a UDP scan. note the additional UDP port 123 is now found, which did NOT show in our previous scans. online online research shows us that this is the port used by the Network Time Protocol.
 use the following scans: -sS, -sT, -sU. Show how the -sT scan requires super user priviliges in order to run since it uses raw sockets. 
- 
+> sudo nmap -Pn -T4 -sI 192.168.210.128:443 45.33.32.156 : nmap idle scan syntax
  ```
 
 - For my demonstration of port scanning I used Nmap on a Ubuntu 22.04 virtual machine to scan scanme.nmap.org for ports of interest. I demonstrated various scans you can perform using Nmap, including a TCP SYN scan, a TCP connect scan, and a UDP scan. 
