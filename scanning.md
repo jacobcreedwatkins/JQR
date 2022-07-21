@@ -24,9 +24,6 @@ PORT    STATE SERVICE
 445/tcp open  microsoft-ds
 ```
 
-
-
-
 |        PORT       |                                        STATE                                               |                           SERVICE                            |
 |-------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | port / udp or tcp | open, closed, filtered, unfiltered, open\|filtered, and closed\|filtered; more info below  | nmap's best approximation of the service running on the port |
@@ -35,12 +32,12 @@ PORT    STATE SERVICE
 
 
 # Port States
-1. `open` - indicates that an application is actively accepting TCP connections, UDP datagrams
-2. `closed` - A closed port is accessible (it receives and responds to Nmap probe packets), but there is no application listening on it. the port is still reachable
-3. `filtered` - Nmap cannot determine if the port is open because packet filtering prevents its probes from reaching the port. The filtering could be from a dedicated firewall device, router rules, or host-based firewall software; provides the least amount of information
-4. `unfiltered` - indicates that a port is accessible, but Nmap is unable to determine whether it is open or closed. Only the ACK scan, which is used to map firewall rulesets, classifies ports into this state
-5. `open|filtered` - indicates that `nmap` is unable to determine whether a port is open or filtered. This occurs for scan types in which open ports give no response, including the UDP, IP protocol, FIN, NULL, and Xmas scans
-6. `closed|filtered` - state is used when Nmap is unable to determine whether a port is closed or filtered. It is only used for the IP ID idle scan, using the `-sI` option
+1. `open`            : indicates that an application is actively accepting TCP connections, UDP datagrams
+2. `closed`          : A closed port is accessible (it receives and responds to Nmap probe packets), but there is no application listening on it. the port is still reachable
+3. `filtered`        : Nmap cannot determine if the port is open because packet filtering prevents its probes from reaching the port. The filtering could be from a dedicated firewall device, router rules, or host-based firewall software; provides the least amount of information
+4. `unfiltered`      : indicates that a port is accessible, but Nmap is unable to determine whether it is open or closed. Only the ACK scan, which is used to map firewall rulesets, classifies ports into this state
+5. `open|filtered`   : indicates that `nmap` is unable to determine whether a port is open or filtered. This occurs for scan types in which open ports give no response, including the UDP, IP protocol, FIN, NULL, and Xmas scans
+6. `closed|filtered` : state is used when Nmap is unable to determine whether a port is closed or filtered. It is only used for the IP ID idle scan, using the `-sI` option
 
 
 ### Syntax Builder
