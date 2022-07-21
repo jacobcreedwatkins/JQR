@@ -67,9 +67,10 @@ PORT    STATE SERVICE
  ### Additional Options
 
  - `-Pn` : pingless scan. This will skip the Nmap host discovery stage altogether. Normally, Nmap uses this stage to determine active machines for heavier scanning, but ths may be pointless if hosts are already known.
- Note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. 
  
 - `-T<1,2,3,4,5>` : Timing options, where the number between 1 and 5 determines aggressiveness of the scan.
+ 
+- Note about SCTP: Stream Control Transmission Protocol is a third transport layer standard besides TCP and UDP. It is a transport layer protocol that is message-driven like UDP, but reliable like TCP. Typically only used by backend telecom systems, so a `-sY` scan is highly specialized.
  
  
 | number |     speed   |   purpose/description                               |
@@ -89,7 +90,7 @@ PORT    STATE SERVICE
 > man raw | egrep EPERM -A1          :    this command shows the literal proof of needing root privileges to interact with raw sockets. raw sockets require root privileges because they can be used to break many basic assumptions or rules of networking, such as running a server on any port (using well known ports for different services). normal users will not need to use raw sockets for almost anything and as a security measure they therefore require root priviliges.
 > sudo nmap -sS 45.33.32.156         :    this command will show the TCP SYN half open scan properly working now that sudo privileges were used.
 > nmap -sT 45.33.32.156              :    demonstrates a TCP full connect scan. note that it does not require sudo privileges!
-> nmap -sU 45.33.32.156              :    demonstrates a UDP scan. note the additional UDP port 123 is now found, which did NOT show in our previous scans. online research shows us that this is the port used by the Network Time Protocol.
+> nmap -sU 45.33.32.156              :    demonstrates a UDP scan. note the additional UDP port 123 is now found, which did NOT show in our previous scans. online online research shows us that this is the port used by the Network Time Protocol.
 use the following scans: -sS, -sT, -sU. Show how the -sT scan requires super user priviliges in order to run since it uses raw sockets. 
  
  ```
@@ -98,9 +99,10 @@ use the following scans: -sS, -sT, -sU. Show how the -sT scan requires super use
 
 
 # References
-[nmap.org](https://nmap.org)
+[nmap.org](https://nmap.org) - Nmap official website, contains all of the information you could ever possible need about Nmap
 
 # Hours Log
-| Hours | Task |
-|-------|------|
-| x hours | x task |
+|  Hours  |                Task                       |
+|---------|-------------------------------------------|
+| 8 hours | research, writeup creation and formatting |
+| 2 hours | demonstration testing, VM configuration   |
